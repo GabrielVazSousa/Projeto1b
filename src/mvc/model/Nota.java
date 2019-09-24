@@ -1,10 +1,14 @@
 package mvc.model;
 
+import java.sql.Timestamp;
+
 public class Nota {
 	
+	private int id;
 	private String text;
 	private String name;
 	private String label;
+	private Timestamp ts;
 	
 
 	public String getName() {
@@ -24,6 +28,18 @@ public class Nota {
 	}
 	public void setLabel(String label) {
 		this.label = label;
+	}
+	public Timestamp getTs() {
+		return ts;
+	}
+	public void setTs(Timestamp ts) {
+		this.ts = ts;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 

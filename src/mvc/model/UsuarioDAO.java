@@ -78,4 +78,19 @@ public class UsuarioDAO {
 		}
 		return imgData;
 	}
+	
+	public boolean validarUsuario(Usuario usuario) throws SQLException {
+		boolean existe = false;
+		PreparedStatement stmt = connection.prepareStatement("SELECT COUNT(*) FROM usuario WHERE login=? AND senha=? LIMIT 2");
+		stmt.setString(1, usuario.getLogin());
+		stmt.setString(2, usuario.getSenha());
+		ResultSet rs = stmt.executeQuery();
+		if (rs.next()) {
+			if (rs.getInt(1) != 0) {
+				existe = true;
+			}
+		}
+	
+		return existe;
+	}
 }

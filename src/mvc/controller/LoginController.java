@@ -1,6 +1,7 @@
 package mvc.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,11 @@ public class LoginController {
 	@RequestMapping("/registro")
 	public String registro() {
 		return "formulario-registro";
+	}
+	
+	@RequestMapping("/menu")
+	public String goToMenu() {
+		return "menu";
 	}
 
 	@RequestMapping(value = "efetuaRegistro", method = RequestMethod.POST)
@@ -41,8 +47,9 @@ public class LoginController {
 	}
 
 	@RequestMapping("/efetuaLogin")
-	public String efetuaLogin(Usuario usuario, HttpSession session) {
-		if (new UsuarioDAO().existeUsuario(usuario)) {
+	public String efetuaLogin(Usuario usuario, HttpSession session) throws SQLException {
+		
+		if (new UsuarioDAO().validarUsuario(usuario)) {
 			session.setAttribute("usuarioLogado", usuario.getLogin());
 			return "menu";
 		}
